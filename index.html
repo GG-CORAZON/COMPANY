@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO — rempli dynamiquement par script.js via CONFIG -->
+  <title>LinkTree GG_CORAZON</title>
+  <meta name="description" content="" />
+  <meta name="theme-color" content="" />
+  <meta property="og:title" content="" />
+  <meta property="og:description" content="" />
+  <meta property="og:url" content="" />
+  <meta property="og:type" content="website" />
+
+  <!-- Google Fonts : Orbitron (titre) + Rajdhani (corps) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome pour les icônes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Canvas des particules en fond -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- Grille décorative cyberpunk -->
+  <div class="grid-overlay"></div>
+
+  <!-- Scanlines overlay -->
+  <div class="scanlines"></div>
+
+  <main class="container">
+
+    <!-- ===== HEADER PROFIL ===== -->
+    <header class="profile">
+
+      <!-- Badge Live -->
+      <div class="live-badge" id="live-badge" aria-live="polite">
+        <span class="live-dot"></span>
+        <span class="live-text" id="live-text"></span>
+      </div>
+
+      <!-- Avatar -->
+      <div class="avatar-wrapper">
+        <div class="avatar-ring"></div>
+        <div class="avatar-ring ring2"></div>
+        <div class="avatar" id="avatar-el" aria-label="Avatar du streamer"></div>
+        <div class="avatar-glitch" id="avatar-glitch"></div>
+      </div>
+
+      <!-- Pseudo & tagline -->
+      <h1 class="pseudo" id="pseudo-el"></h1>
+      <p class="tagline" id="tagline-el"></p>
+
+      <!-- Séparateur néon -->
+      <div class="neon-divider">
+        <span class="divider-line"></span>
+        <span class="divider-diamond">◆</span>
+        <span class="divider-line"></span>
+      </div>
+
+    </header>
+
+    <!-- ===== LIENS ===== -->
+    <section class="links-section" id="links-container" aria-label="Liens réseaux sociaux">
+      <!-- Généré dynamiquement par script.js -->
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <p>Made by BlackBones for <span class="heart">CORAZON</span> </p>
+    </footer>
+
+  </main>
+
+  <!-- Config en premier, puis le script principal -->
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

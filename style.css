@@ -1,0 +1,538 @@
+/* ============================================================
+   STYLE.CSS — LinkTree Cyberpunk / Néon
+   Les couleurs viennent de config.js via des variables CSS
+   injectées dynamiquement dans :root par script.js
+   ============================================================ */
+
+/* ---------- Reset & base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: #e0e0ff;
+  font-family: var(--font-body);
+  font-size: 16px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  cursor: none; /* Masque le curseur natif du navigateur */
+}
+
+/* ---------- Canvas particules ---------- */
+#particles-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ---------- Grille cyberpunk ---------- */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 255, 247, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 247, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ---------- Scanlines ---------- */
+.scanlines {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 4px
+  );
+  animation: scanMove 8s linear infinite;
+}
+
+@keyframes scanMove {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 100px; }
+}
+
+/* ---------- Layout principal ---------- */
+.container {
+  position: relative;
+  z-index: 10;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 48px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* ============================================================
+   HEADER PROFIL
+   ============================================================ */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  margin-bottom: 36px;
+}
+
+/* ---------- Badge Live ---------- */
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: 999px;
+  font-family: var(--font-title);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  border: 1px solid var(--primary);
+  background: rgba(0, 255, 247, 0.07);
+  box-shadow: 0 0 12px rgba(0, 255, 247, 0.2), inset 0 0 10px rgba(0, 255, 247, 0.05);
+  transition: all 0.4s ease;
+  opacity: 0;
+  animation: fadeInDown 0.6s 0.1s forwards;
+}
+
+.live-badge.is-live {
+  border-color: #ff2b2b;
+  background: rgba(255, 43, 43, 0.1);
+  box-shadow: 0 0 20px rgba(255, 43, 43, 0.4), inset 0 0 14px rgba(255, 43, 43, 0.1);
+  color: #ff6b6b;
+}
+
+.live-badge.is-live .live-dot {
+  background: #ff2b2b;
+  animation: pulse-live 1s ease-in-out infinite;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  flex-shrink: 0;
+}
+
+@keyframes pulse-live {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 43, 43, 0.7); }
+  50%       { box-shadow: 0 0 0 7px rgba(255, 43, 43, 0); }
+}
+
+/* ---------- Avatar ---------- */
+.avatar-wrapper {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeInScale 0.7s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 2px solid var(--primary);
+  box-shadow:
+    0 0 0 1px var(--bg),
+    0 0 24px rgba(0, 255, 247, 0.5),
+    inset 0 0 20px rgba(0, 255, 247, 0.05);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-title);
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--primary);
+  text-shadow: 0 0 20px var(--primary);
+  background-size: cover;
+  background-position: center;
+}
+
+.avatar-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: conic-gradient(var(--primary), var(--secondary), var(--accent), var(--primary)) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  animation: spinRing 4s linear infinite;
+  z-index: 3;
+}
+
+.avatar-ring.ring2 {
+  inset: -14px;
+  border-width: 1px;
+  opacity: 0.4;
+  animation-duration: 7s;
+  animation-direction: reverse;
+}
+
+@keyframes spinRing {
+  to { transform: rotate(360deg); }
+}
+
+.avatar-glitch {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* ---------- Pseudo & Tagline ---------- */
+.pseudo {
+  font-family: var(--font-title);
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow:
+    0 0 10px var(--primary),
+    0 0 30px rgba(0, 255, 247, 0.4),
+    0 0 60px rgba(0, 255, 247, 0.15);
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fadeInUp 0.6s 0.3s forwards;
+  position: relative;
+}
+
+.pseudo::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 0;
+  color: var(--accent);
+  opacity: 0;
+  clip-path: inset(0 0 0 0);
+  animation: glitchText 6s 1s infinite;
+}
+
+@keyframes glitchText {
+  0%, 90%, 100% { opacity: 0; transform: none; }
+  91%  { opacity: 0.8; transform: translate(-2px, 1px) skewX(-3deg); clip-path: inset(30% 0 20% 0); }
+  92%  { opacity: 0.8; transform: translate(2px, -1px) skewX(3deg); clip-path: inset(60% 0 10% 0); }
+  93%  { opacity: 0; }
+}
+
+.tagline {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(224, 224, 255, 0.55);
+  letter-spacing: 0.05em;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeInUp 0.6s 0.4s forwards;
+}
+
+/* ---------- Séparateur néon ---------- */
+.neon-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 80%;
+  opacity: 0;
+  animation: fadeIn 0.6s 0.5s forwards;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  box-shadow: 0 0 8px var(--primary);
+}
+
+.divider-diamond {
+  color: var(--primary);
+  font-size: 0.6rem;
+  text-shadow: 0 0 10px var(--primary);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; text-shadow: 0 0 10px var(--primary); }
+  50%       { opacity: 0.5; text-shadow: 0 0 20px var(--primary); }
+}
+
+/* ============================================================
+   LIENS
+   ============================================================ */
+.links-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+/* ---------- Carte lien ---------- */
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: var(--card-bg);
+  border: 1px solid rgba(0, 255, 247, 0.12);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  cursor: pointer;
+  opacity: 0;
+  /* animation appliquée inline via script */
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.link-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--card-accent, rgba(0,255,247,0.06)) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.link-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--card-accent-color, var(--primary)), transparent);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 10px var(--card-accent-color, var(--primary));
+}
+
+.link-card:hover {
+  transform: translateY(-3px) scale(1.015);
+  border-color: var(--card-accent-color, var(--primary));
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(0, 255, 247, 0.15),
+    inset 0 0 20px rgba(0, 255, 247, 0.04);
+}
+
+.link-card:hover::before { opacity: 1; }
+.link-card:hover::after  { transform: scaleX(1); }
+
+.link-card:active {
+  transform: translateY(-1px) scale(1.005);
+}
+
+/* Ligne de scan hover */
+.link-card .scan-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, transparent 40%, rgba(0,255,247,0.04) 50%, transparent 60%);
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition: none;
+}
+
+.link-card:hover .scan-line {
+  animation: scanLink 0.6s ease forwards;
+}
+
+@keyframes scanLink {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* ---------- Icône ---------- */
+.link-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.link-card:hover .link-icon {
+  transform: rotate(-5deg) scale(1.1);
+}
+
+/* ---------- Texte ---------- */
+.link-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.link-label {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.3);
+}
+
+.link-sublabel {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(224, 224, 255, 0.45);
+  letter-spacing: 0.03em;
+}
+
+/* ---------- Flèche ---------- */
+.link-arrow {
+  color: rgba(255,255,255,0.25);
+  font-size: 0.9rem;
+  transition: transform 0.25s ease, color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.link-card:hover .link-arrow {
+  transform: translateX(4px);
+  color: var(--card-accent-color, var(--primary));
+  text-shadow: 0 0 8px var(--card-accent-color, var(--primary));
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  margin-top: 48px;
+  font-size: 0.78rem;
+  color: rgba(224, 224, 255, 0.2);
+  letter-spacing: 0.08em;
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 0.6s 1.2s forwards;
+}
+
+.site-footer .heart {
+  color: var(--accent);
+  text-shadow: 0 0 8px var(--accent);
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.25); }
+}
+
+/* ============================================================
+   ANIMATIONS DE BASE
+   ============================================================ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(0.7); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ============================================================
+   CURSEUR PERSONNALISÉ
+   ============================================================ */
+.cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--primary);
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  opacity: 0.5;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 480px) {
+  .container { padding: 36px 14px 48px; }
+  .pseudo    { font-size: 1.5rem; }
+  .avatar-wrapper,
+  .avatar    { width: 100px; height: 100px; }
+  .link-card { padding: 14px 16px; }
+  .link-icon { width: 40px; height: 40px; font-size: 1.1rem; }
+  .cursor-dot, .cursor-ring { display: none; } /* pas de curseur custom sur mobile */
+}
+
+/* ============================================================
+   UTILITAIRES
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+/* Masquer le curseur natif partout, y compris sur les liens */
+a, button, * {
+  cursor: none !important;
+}
