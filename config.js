@@ -46,7 +46,7 @@ const CONFIG = {
       id:       "discord",
       label:    "Discord",
       sublabel: "Rejoins la communauté",
-      url:      "https://discord.gg/QsUn7VQ8cE",
+      url:      "https://discord.gg/UURcrf9YyC",
       icon:     "discord",
       color:    "#5865f2",
     },
