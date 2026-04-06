@@ -149,8 +149,18 @@
 
       card.innerHTML = `
         <div class="link-icon" style="color:${accentColor}; box-shadow: 0 0 14px ${hexToRgba(accentColor, 0.3)}; border-color: ${hexToRgba(accentColor, 0.25)};">
-          <i class="${iconInfo.fa}" aria-hidden="true"></i>
-        </div>
+        ${(function() {
+          if (!link.iconImg) return `<i class="${iconInfo.fa}" aria-hidden="true"></i>`;
+          const ext = link.iconImg.split('.').pop().toLowerCase();
+          if (['mp4','webm','mov'].includes(ext)) {
+            return `<video src="${link.iconImg}" autoplay loop muted playsinline
+                      style="width:28px;height:28px;object-fit:cover;border-radius:4px;"
+                      aria-hidden="true"></video>`;
+          }
+          return `<img src="${link.iconImg}" alt="${link.label}"
+                  style="width:28px;height:28px;object-fit:contain;border-radius:4px;">`;
+        })()}
+</div>
         <div class="link-text">
           <span class="link-label">${escapeHtml(link.label)}</span>
           <span class="link-sublabel">${escapeHtml(link.sublabel)}</span>
