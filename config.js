@@ -80,7 +80,7 @@ const CONFIG = {
       sublabel: "",
       url:      "https://letterboxd.com/gg_corazon",
       icon:     "letterboxd",
-      iconImg:  "logos/Letterboxd.png",
+      iconImg:  "Letterboxd.png",
       color:    "#3fdd01",
     },
   ],
