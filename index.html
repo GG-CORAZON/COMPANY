@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CORAZON</title>
+  <meta name="description" content="Site officiel de CORAZON — Streamer Twitch. Clips, et communauté.">
+  <meta property="og:title" content="CORAZON — Streamer Twitch">
+  <meta property="og:description" content="Rejoins la communauté de CORAZON sur Twitch !">
+  <meta property="og:type" content="website">
+  <!-- CUSTOMIZE: Remplace YOUR_GITHUB_USERNAME et YOUR_REPO_NAME -->
+  <meta property="og:url" content="https://YOUR_GITHUB_USERNAME.github.io/CorazonV2">
+  <meta property="og:image" content="assets/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Exo+2:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       LOADER
+  ═══════════════════════════════════════ -->
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">
+        <span class="loader-name">CORAZON</span>
+        <div class="loader-bar-wrap">
+          <div class="loader-bar"></div>
+        </div>
+        <span class="loader-tag">Chargement...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       CURSEUR PERSONNALISÉ
+  ═══════════════════════════════════════ -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ═══════════════════════════════════════
+       BARRE DE PROGRESSION
+  ═══════════════════════════════════════ -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════ -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-text">CORA<span class="logo-accent">Z</span>ON</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" class="nav-link">À Propos</a></li>
+        <li><a href="#games" class="nav-link">Contenu</a></li>
+        <li><a href="#clips" class="nav-link">Clips</a></li>
+        <li><a href="#community" class="nav-link">Communauté</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- CUSTOMIZE: Remplace YOUR_TWITCH_CHANNEL -->
+        <a href="https://www.twitch.tv/gg_corazon" target="_blank" class="btn-live" id="liveBtn">
+          <span class="live-dot"></span>
+          <span class="live-text">SUIVRE</span>
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section id="hero">
+    <canvas id="particleCanvas"></canvas>
+
+    <div class="hero-content">
+
+      <div class="hero-text">
+        <p class="hero-eyebrow" data-reveal>BIENVENUE SUR LE SITE DE</p>
+        <h1 class="hero-title" data-reveal>
+          <span class="hero-name glitch" data-text="CORAZON">CORAZON</span>
+        </h1>
+        <div class="hero-subtitle" data-reveal>
+          <span class="typing-prefix">Je stream </span>
+          <span class="typing-text" id="typingText"></span>
+          <span class="typing-cursor">|</span>
+        </div>
+        <p class="hero-desc" data-reveal>
+          Streamer passionné sur Twitch. Rejoins la communauté et vis l'expérience avec moi !
+        </p>
+      </div>
+
+      <div class="hero-cta" data-reveal>
+        <!-- CUSTOMIZE: Remplace YOUR_TWITCH_CHANNEL -->
+        <a href="https://www.twitch.tv/gg_corazon" target="_blank" class="btn btn-primary">
+          <i class="fab fa-twitch"></i> Regarder sur Twitch
+        </a>
+        <!-- CUSTOMIZE: Remplace YOUR_DISCORD_INVITE -->
+        <a href="https://discord.gg/UURcrf9YyC" target="_blank" class="btn btn-secondary">
+          <i class="fab fa-discord"></i> Rejoindre Discord
+        </a>
+      </div>
+
+        <!-- STATS -->
+    </div>
+
+    <div class="hero-avatar" data-reveal>
+      <div class="avatar-frame">
+        <div class="avatar-glow"></div>
+        <!-- CUSTOMIZE: Remplace par ta vraie photo dans assets/avatar.png -->
+        <div class="avatar-img">
+            <img src="assets/avatar2.png" alt="CORAZON" 
+            style="width:100%;height:100%;object-fit:cover;">
+          </div>
+        </div>
+        <div class="avatar-ring ring-1"></div>
+        <div class="avatar-ring ring-2"></div>
+        <div class="avatar-ring ring-3"></div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ── LIVE STREAM ── -->
+<section id="live-stream" style="display:none">
+  <div class="container">
+    <div class="section-header" data-reveal>
+      <p class="section-eyebrow">🔴 En direct</p>
+      <h2 class="section-title">Mon Stream</h2>
+    </div>
+    <div class="stream-embed" data-reveal>
+      <div id="twitch-embed"></div>
+    </div>
+  </div>
+</section>
+
+  <!-- ═══════════════════════════════════════
+       À PROPOS
+  ═══════════════════════════════════════ -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <p class="section-eyebrow">Qui suis-je ?</p>
+        <h2 class="section-title">À Propos de <span class="gradient-text">CORAZON</span></h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card glass-card" data-reveal>
+          <div class="about-icon"><i class="fas fa-gamepad"></i></div>
+          <h3>Le Joueur</h3>
+          <!-- CUSTOMIZE: Personnalise ce texte -->
+          <p>Passionné de jeux vidéo depuis l'enfance, je stream principalement des FPS compétitifs et des RPG. Mon objectif : vous faire vivre les meilleures sessions de jeu !</p>
+        </div>
+        <div class="about-card glass-card" data-reveal>
+          <div class="about-icon"><i class="fas fa-users"></i></div>
+          <h3>La Communauté</h3>
+          <p>La communauté est au cœur de tout. Chaque stream est une occasion de partager, de rire et de créer des souvenirs ensemble. Rejoins la famille !</p>
+        </div>
+        <div class="about-card glass-card" data-reveal>
+          <div class="about-icon"><i class="fas fa-trophy"></i></div>
+          <h3>Le Compétiteur</h3>
+          <p>Toujours en quête de progression, j'aime relever les défis et repousser mes limites. Des tournois aux ranked, le défi est permanent !</p>
+        </div>
+        <div class="about-card glass-card" data-reveal>
+          <div class="about-icon"><i class="fas fa-heart"></i></div>
+          <h3>La Passion</h3>
+          <p>Streamer c'est ma passion avant tout. Je mets tout mon cœur dans chaque contenu pour vous offrir la meilleure expérience possible.</p>
+        </div>
+      </div>
+
+      <div class="about-bio" data-reveal>
+        <div class="bio-content glass-card">
+          <div class="bio-avatar">
+            <img src="assets/avatar.png" alt="CORAZON" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);">          </div>
+          <div class="bio-text">
+            <h3>CORAZON <span class="verified-badge"><i class="fas fa-check"></i></span></h3>
+            <!-- CUSTOMIZE: Ta bio personnelle -->
+            <p>Salut ! Moi c'est <strong>CORAZON</strong>, streamer Twitch depuis 2022. Je joue principalement à <strong>Valorant, je fais du Montage et je parle beaucoup avec la commu </strong>!</p>
+            <p>Mon setup : EVGA GeForce RTX 3080 | Ryzen 7 5700X3D | ROG Strix B550-A Gaming | 32GB RAM | Micro Shure SM7B</p>
+            <div class="bio-tags">
+              <span class="tag">🎮 FPS</span>
+              <span class="tag">🏆 Compétitif</span>
+              <span class="tag">😂 Humour</span>
+              <span class="tag">🇫🇷 Français</span>
+              <span class="tag">⚡ Rage moments</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PLANNING
+
+  <section id="schedule">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <p class="section-eyebrow">Ne rate aucun stream</p>
+        <h2 class="section-title">Planning <span class="gradient-text">Hebdomadaire</span></h2>
+      </div>
+
+      <div class="schedule-timezone" data-reveal>
+        <i class="fas fa-globe"></i> Heure de Paris (UTC+1)
+      </div>
+
+      <div class="schedule-grid" data-reveal>
+
+        <div class="schedule-day off">
+          <div class="day-header">
+            <span class="day-name">LUN</span>
+            <span class="day-full">Lundi</span>
+          </div>
+          <div class="day-content">
+            <div class="day-off-label"><i class="fas fa-moon"></i> Off</div>
+          </div>
+        </div>
+
+        <div class="schedule-day active">
+          <div class="day-header">
+            <span class="day-name">MAR</span>
+            <span class="day-full">Mardi</span>
+          </div>
+          <div class="day-content">
+            <div class="schedule-slot">
+              <div class="slot-time"><i class="fas fa-clock"></i> 20h – 23h</div>
+              <div class="slot-game">
+                <div class="game-dot valorant"></div>
+                <strong>Valorant</strong>
+              </div>
+              <div class="slot-type">Ranked</div>
+              <div class="slot-duration">~3h</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="schedule-day active">
+          <div class="day-header">
+            <span class="day-name">MER</span>
+            <span class="day-full">Mercredi</span>
+          </div>
+          <div class="day-content">
+            <div class="schedule-slot">
+              <div class="slot-time"><i class="fas fa-clock"></i> 19h – 22h</div>
+              <div class="slot-game">
+                <div class="game-dot chat"></div>
+                <strong>Just Chatting</strong>
+              </div>
+              <div class="slot-type">Talk / Q&A</div>
+              <div class="slot-duration">~3h</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="schedule-day active">
+          <div class="day-header">
+            <span class="day-name">JEU</span>
+            <span class="day-full">Jeudi</span>
+          </div>
+          <div class="day-content">
+            <div class="schedule-slot">
+              <div class="slot-time"><i class="fas fa-clock"></i> 20h – 23h</div>
+              <div class="slot-game">
+                <div class="game-dot fortnite"></div>
+                <strong>Fortnite</strong>
+              </div>
+              <div class="slot-type">Solos / Duos</div>
+              <div class="slot-duration">~3h</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="schedule-day off">
+          <div class="day-header">
+            <span class="day-name">VEN</span>
+            <span class="day-full">Vendredi</span>
+          </div>
+          <div class="day-content">
+            <div class="day-off-label"><i class="fas fa-moon"></i> Off</div>
+          </div>
+        </div>
+
+        <div class="schedule-day active special">
+          <div class="day-header">
+            <span class="day-name">SAM</span>
+            <span class="day-full">Samedi</span>
+            <span class="special-badge">⚡ SPÉCIAL</span>
+          </div>
+          <div class="day-content">
+            <div class="schedule-slot">
+              <div class="slot-time"><i class="fas fa-clock"></i> 15h – 20h</div>
+              <div class="slot-game">
+                <div class="game-dot gta"></div>
+                <strong>GTA V RP</strong>
+              </div>
+              <div class="slot-type">Soirée spéciale</div>
+              <div class="slot-duration">~5h</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="schedule-day active">
+          <div class="day-header">
+            <span class="day-name">DIM</span>
+            <span class="day-full">Dimanche</span>
+          </div>
+          <div class="day-content">
+            <div class="schedule-slot">
+              <div class="slot-time"><i class="fas fa-clock"></i> 14h – 18h</div>
+              <div class="slot-game">
+                <div class="game-dot irl"></div>
+                <strong>Divers / IRL</strong>
+              </div>
+              <div class="slot-type">Au programme du jour</div>
+              <div class="slot-duration">~4h</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="schedule-cta" data-reveal>
+        <p>Active les notifications pour ne jamais rater un stream !</p>
+        <a href="https://twitch.tv/YOUR_TWITCH_CHANNEL" target="_blank" class="btn btn-primary">
+          <i class="fas fa-bell"></i> Activer les notifications
+        </a>
+      </div>
+    </div>
+  </section>
+  ═══════════════════════════════════════ -->
+  <!-- ═══════════════════════════════════════
+       CONTENU / JEUX
+  ═══════════════════════════════════════ -->
+  <section id="games">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <p class="section-eyebrow">Ce que je joue</p>
+        <h2 class="section-title">Mon <span class="gradient-text">Contenu</span></h2>
+      </div>
+
+      <div class="games-grid">
+        <!-- CUSTOMIZE: Modifie les jeux et pourcentages -->
+        <div class="game-card glass-card" data-reveal>
+          <div class="game-cover valorant-cover">
+            <div class="game-overlay">
+              <div class="game-icon">⚔️</div>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Valorant</h3>
+            <div class="game-rank"><i class="fas fa-star"></i> Rang Ascendant</div>
+            <div class="game-bar">
+              <div class="game-bar-fill" style="--pct: 45%"></div>
+            </div>
+            <div class="game-pct">60% du contenu</div>
+          </div>
+        </div>
+
+        <div class="game-card glass-card" data-reveal>
+          <div class="game-cover fortnite-cover">
+            <div class="game-overlay">
+              <div class="game-icon">🖥️</div>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Montage</h3>
+            <div class="game-rank"><i class="fas fa-computer"></i> Je monte mes clips avec vous</div>
+            <div class="game-bar">
+              <div class="game-bar-fill" style="--pct: 25%"></div>
+            </div>
+            <div class="game-pct">20% du contenu</div>
+          </div>
+        </div>
+
+        <div class="game-card glass-card" data-reveal>
+          <div class="game-cover chat-cover">
+            <div class="game-overlay">
+              <div class="game-icon">💬</div>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Just Chatting</h3>
+            <div class="game-rank"><i class="fas fa-comments"></i> Talk & Q&A</div>
+            <div class="game-bar">
+              <div class="game-bar-fill" style="--pct: 20%"></div>
+            </div>
+            <div class="game-pct">20% du contenu</div>
+          </div>
+        </div>
+
+        <div class="game-card glass-card" data-reveal>
+          <div class="game-cover talk-cover">
+            <div class="game-overlay">
+              <div class="game-icon">🗣️</div>
+            </div>
+          </div>
+          <div class="game-info">
+            <h3>Je vous parle</h3>
+            <div class="game-rank"><i class="fas fa-volume-high"></i> JE PARLE TOUT LE TEMPS</div>
+            <div class="game-bar">
+              <div class="game-bar-fill" style="--pct: 100%"></div>
+            </div>
+            <div class="game-pct">100% du contenu</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CLIPS
+  ═══════════════════════════════════════ -->
+  <section id="clips">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <p class="section-eyebrow">Les meilleurs moments</p>
+        <h2 class="section-title">Derniers <span class="gradient-text">Clips</span></h2>
+      </div>
+
+      <div class="clips-grid">
+        <!-- CUSTOMIZE: Remplace les iframes par tes vrais clips Twitch -->
+        <!-- Format: https://clips.twitch.tv/embed?clip=CLIP_ID&parent=YOUR_DOMAIN -->
+        <div class="clip-card glass-card" data-reveal data-clip="WimpyPhilanthropicHawkPipeHype-TNM6mzqmcTV-0PiA" data-title="Un clip incroyable sur Valorant">
+          <div class="clip-thumbnail">
+            <div class="clip-play-overlay">
+              <div class="clip-play-btn"><i class="fas fa-play"></i></div>
+            </div>
+            <img src="assets/clips/Clip1.jpg" alt="Clip 1" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="clip-info">
+            <h4>Sèche cheveux</h4>
+            <div class="clip-meta">
+            </div>
+          </div>
+        </div>
+
+        <div class="clip-card glass-card" data-reveal data-clip="FuriousSourSandpiperOptimizePrime-DjoLbE0u3uWwJWBR" data-title="Un clip incroyable sur Valorant">
+          <div class="clip-thumbnail">
+            <div class="clip-play-overlay">
+              <div class="clip-play-btn"><i class="fas fa-play"></i></div>
+            </div>
+            <img src="assets/clips/Clip2.jpg" alt="Clip 2" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="clip-info">
+            <h4>La panique, le ban ?</h4>
+            <div class="clip-meta">
+            </div>
+          </div>
+        </div>
+
+        <div class="clip-card glass-card" data-reveal data-clip="PiliableFrigidPancakeTheTarFu-rL4jDKo47Ux8mgD5" data-title="Un clip incroyable sur Valorant">
+          <div class="clip-thumbnail">
+            <div class="clip-play-overlay">
+              <div class="clip-play-btn"><i class="fas fa-play"></i></div>
+            </div>
+            <img src="assets/clips/Clip3.jpg" alt="Clip 3" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="clip-info">
+            <h4>ALEEEEED !!!</h4>
+            <div class="clip-meta">
+            </div>
+          </div>
+        </div>
+
+        <div class="clip-card glass-card" data-reveal data-clip="SwissColdbloodedKoalaFunRun-xoG4rNyWMpqVwJzu" data-title="Un clip incroyable sur Valorant">
+          <div class="clip-thumbnail">
+            <div class="clip-play-overlay">
+              <div class="clip-play-btn"><i class="fas fa-play"></i></div>
+            </div>
+            <img src="assets/clips/Clip4.jpg" alt="Clip 4" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="clip-info">
+            <h4>Nitro & Sleep ??</h4>
+            <div class="clip-meta">
+            </div>
+          </div>
+        </div>
+
+        <div class="clip-card glass-card" data-reveal data-clip="AstuteAwkwardEchidnaPanicVis-cM4Nvwv6uVUtvThS" data-title="Un clip incroyable sur Valorant">
+          <div class="clip-thumbnail">
+            <div class="clip-play-overlay">
+              <div class="clip-play-btn"><i class="fas fa-play"></i></div>
+            </div>
+            <img src="assets/clips/Clip5.jpg" alt="Clip 5" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="clip-info">
+            <h4>Euuuh ?</h4>
+            <div class="clip-meta">
+            </div>
+          </div>
+        </div>
+
+        <div class="clip-card glass-card" data-reveal data-clip="WiseYawningHerdPlanking-U5U85NiueEUniUda" data-title="Un clip incroyable sur Valorant">
+          <div class="clip-thumbnail">
+            <div class="clip-play-overlay">
+              <div class="clip-play-btn"><i class="fas fa-play"></i></div>
+            </div>
+            <img src="assets/clips/Clip6.jpg" alt="Clip 6" style="width:100%;height:100%;object-fit:cover;"></div>
+          <div class="clip-info">
+            <h4>Session maquillage ?</h4>
+            <div class="clip-meta">
+            </div>
+          </div>
+        </div>
+
+      <div class="clips-cta" data-reveal>
+        <!-- CUSTOMIZE: Remplace par ton lien de clips Twitch -->
+        <a href="https://twitch.tv/gg_corazon/clips" target="_blank" class="btn btn-outline">
+          <i class="fab fa-twitch"></i> Voir tous les clips
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       COMMUNAUTÉ
+  ═══════════════════════════════════════ -->
+  <section id="community">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <p class="section-eyebrow">Rejoins la miff !</p>
+        <h2 class="section-title">La <span class="gradient-text">Communauté</span></h2>
+      </div>
+
+      <div class="community-grid">
+        <div class="community-main glass-card" data-reveal>
+          <div class="discord-card">
+            <div class="discord-icon">
+              <i class="fab fa-discord"></i>
+            </div>
+            <div class="discord-info">
+              <h3>Serveur Discord</h3>
+              <p>Rejoins notre serveur Discord pour discuter, partager des clips, et rester informé des prochains streams !</p>
+              <div class="discord-stats">
+                <div class="d-stat">
+                  <span class="d-num" id="discordMembers">—</span>
+                  <span class="d-label">Membres</span>
+                </div>
+                <div class="d-stat">
+                  <div class="online-dot"></div>
+                  <span class="d-num" id="discordOnline">—</span>
+                  <span class="d-label">En ligne</span>
+                </div>
+              </div>
+              <!-- CUSTOMIZE: Remplace YOUR_DISCORD_INVITE -->
+              <a href="https://discord.gg/UURcrf9YyC" target="_blank" class="btn btn-discord">
+                <i class="fab fa-discord"></i> Rejoindre le Discord
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="community-socials" data-reveal>
+          <h3 class="socials-title">Réseaux Sociaux</h3>
+          <div class="social-cards-grid">
+            <!-- CUSTOMIZE: Remplace chaque lien avec tes vrais profils -->
+            <a href="https://www.twitch.tv/gg_corazon" target="_blank" class="social-card twitch">
+              <i class="fab fa-twitch"></i>
+              <div>
+                <strong>Twitch</strong>
+                <span>@CORAZON</span>
+              </div>
+            </a>
+            <a href="https://www.youtube.com/@gg_corazon" target="_blank" class="social-card youtube">
+              <i class="fab fa-youtube"></i>
+              <div>
+                <strong>YouTube</strong>
+                <span>CORAZON</span>
+              </div>
+            </a>
+            <a href="https://www.instagram.com/gg_corazon" target="_blank" class="social-card instagram">
+              <i class="fab fa-instagram"></i>
+              <div>
+                <strong>Instagram</strong>
+                <span>@CORAZON</span>
+              </div>
+            </a>
+            <a href="https://www.tiktok.com/@gg_corazon" target="_blank" class="social-card tiktok">
+              <i class="fab fa-tiktok"></i>
+              <div>
+                <strong>TikTok</strong>
+                <span>@CORAZON</span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="support-section" data-reveal>
+        <h3>Soutenir CORAZON</h3>
+        <div class="support-cards">
+          <div class="support-card glass-card">
+            <div class="support-icon sub"><i class="fab fa-twitch"></i></div>
+            <h4>S'abonner</h4>
+            <p>Soutenez le stream et accédez aux emotes exclusives, au badge et au chat sub-only.</p>
+            <a href="https://twitch.tv/subs/gg_corazon" target="_blank" class="btn btn-small btn-primary">S'abonner</a>
+          </div>
+          <div class="support-card glass-card">
+            <div class="support-icon bits"><i class="fas fa-gem"></i></div>
+            <h4>Bits</h4>
+            <p>Envoyez des Bits pour apparaître dans le chat et m'encourager en direct !</p>
+            <a href="https://twitch.tv/gg_corazon" target="_blank" class="btn btn-small btn-secondary">Envoyer des Bits</a>
+          </div>
+          <div class="support-card glass-card">
+            <div class="support-icon tip"><i class="fas fa-heart"></i></div>
+            <h4>Don</h4>
+            <p>Un don direct pour contribuer à l'amélioration du setup et du contenu.</p>
+            <!-- CUSTOMIZE: Remplace par ton lien StreamElements ou Streamlabs -->
+            <a href="https://streamlabs.com/gg_corazon" target="_blank" class="btn btn-small btn-outline">Faire un don</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PARTENAIRES
+  <section id="partners">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <p class="section-eyebrow">Ils nous font confiance</p>
+        <h2 class="section-title">Partenaires <span class="gradient-text">&amp; Sponsors</span></h2>
+      </div>
+
+      <div class="partners-grid" data-reveal>
+
+        <div class="partner-item glass-card">
+          <div class="partner-logo-ph">PARTENAIRE 1</div>
+        </div>
+        <div class="partner-item glass-card">
+          <div class="partner-logo-ph">PARTENAIRE 2</div>
+        </div>
+        <div class="partner-item glass-card">
+          <div class="partner-logo-ph">PARTENAIRE 3</div>
+        </div>
+        <div class="partner-item glass-card">
+          <div class="partner-logo-ph">PARTENAIRE 4</div>
+        </div>
+        <div class="partner-item glass-card">
+          <div class="partner-logo-ph">PARTENAIRE 5</div>
+        </div>
+      </div>
+
+      <div class="partner-cta" data-reveal>
+        <p>Intéressé par un partenariat ?</p>
+
+        <a href="mailto:contact@corazon.fr" class="btn btn-outline">
+          <i class="fas fa-envelope"></i> Me contacter
+        </a>
+      </div>
+    </div>
+  </section>
+  ═══════════════════════════════════════ -->
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer>
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <span class="footer-logo">COR<span class="logo-accent">A</span>ZON</span>
+            <p>Streamer Twitch passionné. Rejoins la communauté et vis l'aventure avec moi !</p>
+            <div class="footer-socials">
+              <a href="https://www.twitch.tv/gg_corazon" target="_blank" aria-label="Twitch"><i class="fab fa-twitch"></i></a>
+              <a href="https://discord.gg/UURcrf9YyC" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+              <a href="https://www.youtube.com/@gg_corazon" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+              <a href="https://www.instagram.com/gg_corazon" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.tiktok.com/@gg_corazon" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+          </div>
+
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul>
+              <li><a href="#hero">Accueil</a></li>
+              <li><a href="#about">À Propos</a></li>
+              <li><a href="#games">Contenu</a></li>
+              <li><a href="#clips">Clips</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Communauté</h4>
+            <ul>
+              <li><a href="https://discord.gg/UURcrf9YyC" target="_blank">Discord</a></li>
+              <li><a href="https://twitch.tv/subs/gg_corazon" target="_blank">S'abonner</a></li>
+              <li><a href="https://streamlabs.com/gg_corazon">Faire un don</a></li>
+              <li><a href="mailto:contact@corazon.fr">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Informations</h4>
+            <ul>
+              <li><a href="javascript:void(0)" id="openRulesModal">Règles de la communauté</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>© 2026 Corazon. Tous droits réservés.</p>
+        <p>Made by BlackBones</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       MODAL CLIPS
+  ═══════════════════════════════════════ -->
+  <div id="clipModal" class="clip-modal">
+    <div class="clip-modal-backdrop"></div>
+    <div class="clip-modal-container">
+      <div class="clip-modal-header">
+        <h3 id="clipModalTitle"></h3>
+        <button class="clip-modal-close" id="clipModalClose" aria-label="Fermer">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="clip-modal-player">
+        <iframe id="clipModalIframe" allowfullscreen frameborder="0" scrolling="no"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bouton retour en haut -->
+  <button class="back-to-top" id="backToTop" aria-label="Retour en haut">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="js/main.js"></script>
+  <script src="https://embed.twitch.tv/embed/v1.js"></script>
+</body>
+</html>
