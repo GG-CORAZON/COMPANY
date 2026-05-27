@@ -65,6 +65,7 @@
         <li><a href="#about" class="nav-link">À Propos</a></li>
         <li><a href="#games" class="nav-link">Contenu</a></li>
         <li><a href="#clips" class="nav-link">Clips</a></li>
+        <li><a href="#artwork" class="nav-link">Artwork</a></li>
         <li><a href="#community" class="nav-link">Communauté</a></li>
       </ul>
 
@@ -198,14 +199,20 @@
             <h3>CORAZON <span class="verified-badge"><i class="fas fa-check"></i></span></h3>
             <!-- CUSTOMIZE: Ta bio personnelle -->
             <p>Salut ! Moi c'est <strong>CORAZON</strong>, streamer Twitch depuis 2022. Je joue principalement à <strong>Valorant, je fais du Montage et je parle beaucoup avec la commu </strong>!</p>
-            <p>Mon setup : EVGA GeForce RTX 3080 | Ryzen 7 5700X3D | ROG Strix B550-A Gaming | 32GB RAM | Micro Shure SM7B | GoXLR | StreamDeck | SSD NVME Crucial P3 2To | Wooting 60HE(clavier) | Saturn pro (tapis souris) | Logitech C920 (cam)</p>
-            <div class="bio-tags">
-              <span class="tag">🎮 FPS</span>
-              <span class="tag">🏆 Compétitif</span>
-              <span class="tag">😂 Humour</span>
-              <span class="tag">🇫🇷 Français</span>
-              <span class="tag">⚡ Rage moments</span>
-            </div>
+            <p class="bio-setup-label" style="text-align:center;">🖥️ Mon Setup</p>
+              <div class="bio-tags">
+                <span class="tag tag-gpu">🎮 RTX 3080</span>
+                <span class="tag tag-cpu">⚡ Ryzen 7 5700X3D</span>
+                <span class="tag tag-mb">🖥️ ROG Strix B550-A</span>
+                <span class="tag tag-ram">💾 32GB RAM</span>
+                <span class="tag tag-mic">🎙️ Shure SM7B</span>
+                <span class="tag tag-audio">🎚️ GoXLR</span>
+                <span class="tag tag-stream">🎛️ StreamDeck</span>
+                <span class="tag tag-storage">💿 SSD NVME Crucial P3 2To</span>
+                <span class="tag tag-keyboard">⌨️ Wooting 60HE (clavier)</span>
+                <span class="tag tag-mousepad">🖱️ Saturn Pro (tapis souris)</span>
+                <span class="tag tag-cam">📷 Logitech C920 (cam)</span>
+              </div>
           </div>
         </div>
       </div>
@@ -528,6 +535,59 @@
       </div>
     </div><!-- fin .container -->
   </section>
+
+  <!-- ═══════════════════════════════════════
+       ARTWORK
+  ═══════════════════════════════════════ -->
+  <section id="artwork">
+    <div class="container">
+      <div class="section-header" data-reveal>
+        <p class="section-eyebrow">Univers Visuel</p>
+        <h2 class="section-title">ARTWORK</h2>
+        <p class="section-desc">Les emotes et badges exclusifs de la chaîne.</p>
+      </div>
+
+      <div class="artwork-grid">
+
+        <!-- ── MES EMOTES ── -->
+        <div class="artwork-panel glass-card" data-reveal>
+          <h3 class="artwork-panel-title"><i class="fas fa-smile"></i> Mes Emotes</h3>
+          <div class="artwork-items" id="emotes-grid">
+            <!-- CUSTOMIZE: ajoute tes emotes ici -->
+            <!-- Exemple : <div class="artwork-item" data-src="assets/emotes/emote1.png" data-name="Nom Emote">
+                             <img src="assets/emotes/emote1.png" alt="Emote 1">
+                           </div> -->
+            <p class="artwork-empty"><i class="fas fa-image"></i> Emotes à venir…</p>
+          </div>
+          <p class="artwork-hint"><i class="fas fa-search-plus"></i> Clique sur une image pour l'agrandir</p>
+        </div>
+
+        <!-- ── MES BADGES ── -->
+        <div class="artwork-panel glass-card" data-reveal>
+          <h3 class="artwork-panel-title"><i class="fas fa-certificate"></i> Mes Badges</h3>
+          <div class="artwork-items" id="badges-grid">
+            <!-- CUSTOMIZE: ajoute tes badges ici -->
+            <!-- Exemple : <div class="artwork-item" data-src="assets/badges/badge1.png" data-name="Nom Badge">
+                             <img src="assets/badges/badge1.png" alt="Badge 1">
+                           </div> -->
+            <p class="artwork-empty"><i class="fas fa-certificate"></i> Badges à venir…</p>
+          </div>
+          <p class="artwork-hint"><i class="fas fa-search-plus"></i> Clique sur une image pour l'agrandir</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ARTWORK LIGHTBOX ── -->
+  <div id="artworkModal" class="artwork-modal" role="dialog" aria-modal="true">
+    <div class="artwork-modal-overlay"></div>
+    <div class="artwork-modal-content">
+      <button class="artwork-modal-close" id="closeArtworkModal" aria-label="Fermer"><i class="fas fa-times"></i></button>
+      <img id="artworkModalImg" src="" alt="">
+      <p class="artwork-modal-name" id="artworkModalName"></p>
+    </div>
+  </div>
 
   <!-- ═══════════════════════════════════════
        COMMUNAUTÉ

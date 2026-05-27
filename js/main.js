@@ -540,6 +540,49 @@ function initStreamEmbed() {
   });
 }
 
+// ── ARTWORK LIGHTBOX ───────────────────────────────────
+function initArtworkModal() {
+  const modal    = document.getElementById('artworkModal');
+  if (!modal) return;
+
+  const modalImg  = document.getElementById('artworkModalImg');
+  const modalName = document.getElementById('artworkModalName');
+  const closeBtn  = document.getElementById('closeArtworkModal');
+  const overlay   = modal.querySelector('.artwork-modal-overlay');
+
+  document.querySelectorAll('.artwork-item').forEach(item => {
+    item.addEventListener('click', () => {
+      modalImg.src         = item.dataset.src || '';
+      modalImg.alt         = item.dataset.name || '';
+      modalName.textContent = item.dataset.name || '';
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeModal() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    setTimeout(() => { modalImg.src = ''; }, 300);
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', closeModal);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+  });
+}
+
+// ── PROTECTION DU CONTENU ──────────────────────────────
+function initContentProtection() {
+  // Bloquer le clic droit sur tout le site
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  // Bloquer le drag des images
+  document.addEventListener('dragstart', e => {
+    if (e.target.tagName === 'IMG') e.preventDefault();
+  });
+}
+
 // ── INIT ALL ───────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initLoader();
@@ -558,6 +601,8 @@ document.addEventListener('DOMContentLoaded', () => {
   fetchDiscordStats();
   initRulesModal();
   initStreamEmbed();
+  initArtworkModal();
+  initContentProtection();
 
   // Cursor (desktop only)
   if (window.matchMedia('(pointer: fine)').matches) {
