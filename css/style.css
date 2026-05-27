@@ -1529,6 +1529,8 @@ section {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  max-width: 1050px;
+  margin: 0 auto;
 }
 
 .support-card {
