@@ -1477,6 +1477,7 @@ section {
 .social-card.youtube:hover  { border-color: rgba(255,0,0,0.5);    background: rgba(255,0,0,0.08); }
 .social-card.instagram:hover{ border-color: rgba(225,48,108,0.5); background: rgba(225,48,108,0.08); }
 .social-card.tiktok:hover   { border-color: rgba(0,242,234,0.5);  background: rgba(0,242,234,0.08); }
+.social-card.email:hover    { border-color: rgba(234,67,53,0.5);  background: rgba(234,67,53,0.08); }
 
 .social-card i {
   font-size: 1.3rem;
@@ -1489,6 +1490,7 @@ section {
 .social-card.youtube   i { color: #ff0000; }
 .social-card.instagram i { color: #e1306c; }
 .social-card.tiktok    i { color: #00f2ea; }
+.social-card.email     i { color: #ea4335; }
 
 .social-card div {
   flex: 1;
